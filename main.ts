@@ -30,6 +30,7 @@ let てきのむき = 0
 let ぷれいやー: game.LedSprite = null
 ぷれいやー = game.createSprite(2, 4)
 let てき = game.createSprite(4, 0)
+let POW = game.createSprite(0, 1)
 game.setLife(3)
 basic.pause(1000)
 basic.forever(function () {
@@ -60,6 +61,24 @@ basic.forever(function () {
         }
     }
     basic.pause(500)
+})
+basic.forever(function () {
+    if (ぷれいやー.isTouching(POW)) {
+        てき.delete()
+        POW.delete()
+    }
+})
+basic.forever(function () {
+    if (てき.isDeleted()) {
+        game.addScore(1)
+        てき = game.createSprite(0, 2)
+        てき = game.createSprite(4, 2)
+        POW = game.createSprite(2, 0)
+    }
+    if (ぷれいやー.isTouching(POW)) {
+        てき.delete()
+        てき.delete()
+    }
 })
 basic.forever(function () {
     if (てき.isTouching(ぷれいやー)) {
